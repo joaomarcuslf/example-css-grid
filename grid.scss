@@ -1,15 +1,15 @@
-$grid__bp-sm: 576;
-$grid__bp-md: 768;
-$grid__bp-lg: 992;
-$grid__bp-xl: 1200;
-$grid__cols: 12;
+$device-sm: 576;
+$device-md: 768;
+$device-lg: 992;
+$device-xl: 1200;
+$cols-quantity: 12;
 
 $map-grid-props: (
         '': 0,
-        '-sm': $grid__bp-sm,
-        '-md': $grid__bp-md,
-        '-lg': $grid__bp-lg,
-        '-xl': $grid__bp-xl
+        '-sm': $device-sm,
+        '-md': $device-md,
+        '-lg': $device-lg,
+        '-xl': $device-xl
 );
 
 @mixin create-mq($breakpoint, $min-or-max) {
@@ -55,7 +55,7 @@ $map-grid-props: (
 }
 
 .container {
-  max-width: $grid__bp-md * 1px;
+  max-width: $device-md * 1px;
   margin: 0 auto;
   &--fluid {
     margin: 0;
@@ -67,6 +67,6 @@ $map-grid-props: (
     width: 100%;
   }
   @each $modifier , $breakpoint in $map-grid-props {
-    @include create-col-classes($modifier, $grid__cols, $breakpoint);
+    @include create-col-classes($modifier, $cols-quantity, $breakpoint);
   }
 }
