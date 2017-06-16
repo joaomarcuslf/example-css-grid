@@ -5,7 +5,7 @@ $device-xl: 1200;
 $cols-quantity: 12;
 
 $map-grid-props: (
-        '': 0,
+        '-xs': 0,
         '-sm': $device-sm,
         '-md': $device-md,
         '-lg': $device-lg,
@@ -24,14 +24,14 @@ $map-grid-props: (
 
 @mixin create-col-classes($modifier, $grid-cols, $breakpoint) {
   @include create-mq($breakpoint, 'min') {
-    &__col#{$modifier}-offset-0 {
+    & .col#{$modifier}-offset-0 {
       margin-left: 0;
     }
     @for $i from 1 through $grid-cols {
-      &__col#{$modifier}-#{$i} {
+      & .col#{$modifier}-#{$i} {
         flex-basis: (100 / ($grid-cols / $i) ) * 1%;
       }
-      &__col#{$modifier}-offset-#{$i} {
+      & .col#{$modifier}-offset-#{$i} {
         margin-left: (100 / ($grid-cols / $i) ) * 1%;
       }
     }
@@ -39,9 +39,6 @@ $map-grid-props: (
 }
 
 @each $modifier , $breakpoint in $map-grid-props {
-  @if($modifier == '') {
-    $modifier: '-xs';
-  }
   @include create-mq($breakpoint - 1, 'max') {
     .hidden#{$modifier}-down {
       display: none !important;
@@ -57,15 +54,16 @@ $map-grid-props: (
 .container {
   max-width: $device-md * 1px;
   margin: 0 auto;
-  &--fluid {
+  &.is-fluid {
     margin: 0;
     max-width: 100%;
   }
-  &__row {
+  & .row {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
   }
+
   @each $modifier , $breakpoint in $map-grid-props {
     @include create-col-classes($modifier, $cols-quantity, $breakpoint);
   }
